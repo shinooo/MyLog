@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="EditLogView">
+        <attr name="editLogViewString" format="string" />
+        <attr name="editLogViewDimension" format="dimension" />
+        <attr name="editLogViewColor" format="color" />
+        <attr name="editLogViewDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>

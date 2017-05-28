@@ -1,0 +1,11 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="jp.techacademy.shino.oomori.taskapp.MainActivity">
+    <item
+        android:id="@+id/menu1"
+        android:title="カテゴリ追加"
+        app:showAsAction="never"
+        />
+</menu>
