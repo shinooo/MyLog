@@ -17,7 +17,7 @@ public class MLog extends RealmObject implements Serializable {
     private int categoryId;
     private String mLogDetail;
     private Date logStartTime;
-
+    private Date logEndTime;
 
     // id をプライマリーキーとして設定
     @PrimaryKey
@@ -70,5 +70,14 @@ public class MLog extends RealmObject implements Serializable {
     public void setLogStartTime(Date logStartTime) {
         this.logStartTime = logStartTime;
     }
+
+    public Date getLogEndTime() {
+        return logEndTime;
+    }
+
+    public void setLogEndTime(Date logEndTime) {
+        this.logEndTime = logEndTime;
+    }
+
 
 }

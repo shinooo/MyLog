@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class LogGridView extends GridLayout {
 
     public LogGridView(Context context) {
@@ -20,41 +23,48 @@ public class LogGridView extends GridLayout {
         this(context,null);
     }
 
-    public LogGridView(Context context, AttributeSet attrs)
-    {
+    public LogGridView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
     public LogGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context,attrs,defStyleAttr);
 
-        for (int i = 0 ; i < 24 ;i++){
-            final View view = new View(context);
+        for (int i = 0 ; i < 96 ;i++){
+            TextView view = new TextView(context);
             view.setId(i);
-            view.setLayoutParams(new ViewGroup.LayoutParams(50,100));
-
-            if(i % 2 == 0) {
-                view.setBackgroundColor(Color.BLUE);
-            } else {
-                view.setBackgroundColor(Color.YELLOW);
+            if(i%4 == 0) {
+                view.setText(String.valueOf(i/4));
             }
+            view.setLayoutParams(new ViewGroup.LayoutParams(80,200));
+            view.setBackgroundResource(R.drawable.waku2);
             addView(view);
         }
+        setColumnCount(16);
+    }
 
-        // LayoutInflater.from(context).inflate(R.layout.custom_grid_view,this,true);
+    public void setColorAtPosition(Date startDate, Date endDate, int color)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(startDate);
+        int s_h = cal.get(Calendar.HOUR_OF_DAY);
+        int s_m = cal.get(Calendar.MINUTE);
+        int startId = s_h * 4 + (s_m / 15);
+
+        cal.setTime(endDate);
+        int e_h = cal.get(Calendar.HOUR_OF_DAY);
+        int e_m = cal.get(Calendar.MINUTE);
+        int endId = e_h * 4 + (e_m / 15);
+        for (int i = startId; i < endId; i++) {
+            View view = findViewById(i);
+            view.setBackgroundColor(color);
+        }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Paint paint = new Paint();
-        paint.setColor(Color.BLUE);
-        //描画に使う色を指定
-        canvas.drawLine(0, 0, 100, 100, paint);
-        //線を引く。
-
-        invalidate();
 
     }
 }

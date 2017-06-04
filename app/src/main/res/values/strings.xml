@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyLog</string>
+    <string name="title_activity_edit_log">MyLog編集</string>
 </resources>
