@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class EditLogActivity extends AppCompatActivity {
+public class EditLogActivity extends AppCompatActivity implements AddLogListener {
     EditLogView editLogView;
 
     @Override
@@ -20,6 +20,11 @@ public class EditLogActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         editLogView = (EditLogView)findViewById(R.id.log_edit_view);
+        editLogView.setAddLogListener(this);
     }
 
+    @Override
+    public void onAddLogFinished() {
+        finish();
+    }
 }

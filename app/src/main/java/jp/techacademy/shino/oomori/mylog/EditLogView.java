@@ -37,6 +37,7 @@ public class EditLogView extends FrameLayout {
     private Realm mRealm;
     private CategoryAdapter categoryAdapter;
     private int selectedCategoryID;
+    private AddLogListener addLogListener;
 
     private View.OnClickListener mOnDateClickListener = new View.OnClickListener() {
         @Override
@@ -167,6 +168,10 @@ public class EditLogView extends FrameLayout {
         mEndTimeButton.setText(endTimeString);
     }
 
+    public void setAddLogListener(AddLogListener listener) {
+        addLogListener = listener;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -214,6 +219,11 @@ public class EditLogView extends FrameLayout {
         realm.commitTransaction();
 
         realm.close();
+
+        // Activityを終了
+        if (addLogListener != null) {
+            addLogListener.onAddLogFinished();
+        }
     }
 
     private void setCategorySpinner() {

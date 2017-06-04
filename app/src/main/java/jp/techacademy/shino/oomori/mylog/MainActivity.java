@@ -107,13 +107,12 @@ public class MainActivity extends AppCompatActivity {
         String dateString = mYear + "/" + String.format("%02d",(mMonth + 1)) + "/" + String.format("%02d", mDay);
         mDateButton.setText(dateString);
 
-        ChangeLogView();
     }
 
     private void ChangeLogView() {
-        // TODO : 画面リセット
-        LogGridView view = new LogGridView(MainActivity.this);
-        view.invalidate();
+        customView = (LogGridView) findViewById(R.id.log_grid);
+        // 画面リセット
+        customView.clearColor();
 
         // Realmの設定
         mRealm = Realm.getDefaultInstance();
@@ -123,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < mLogRealmResults.size(); i++)
         {
             final MLog mLog = mLogRealmResults.get(i);
-            customView = (LogGridView) findViewById(R.id.log_grid);
             Date start = mLog.getLogStartTime();
             Date end = mLog.getLogEndTime();
 
@@ -150,6 +148,26 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.option_menu, menu);
 
         return true;
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ChangeLogView();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override
